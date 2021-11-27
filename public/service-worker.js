@@ -1,11 +1,11 @@
 const FILES_TO_CACHE = [
     '/',
     '/index.html',
-    '/topic.html',
-    '/assets/css/style.css',
+    '/indexeddb.js',
+    '/styles.css',
     '/index.js',
-    'public/icons/icon-192x192.png',
-    'public/icons/icon-512x512.png'
+    '/icons/icon-192x192.png',
+    '/icons/icon-512x512.png'
 
   ];
   
