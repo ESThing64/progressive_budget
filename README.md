@@ -16,4 +16,4 @@ Track your expenses. You can use this application online or offline!
 * [MongoDB](https://www.mongodb.com)
 
 ## Known Issues.
-* service worker has issues when running the server offline.
+* service worker has issues when running the server on a local machine, while there are no issues when ran on heroku
