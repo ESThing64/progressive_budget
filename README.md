@@ -17,3 +17,6 @@ Track your expenses. You can use this application online or offline!
 
 ## Known Issues.
 * service worker has issues when running the server offline.
+
+## Other notes
+* This code was highly influnced by the mini project from unit 18 and exercise 13 from unit 9
