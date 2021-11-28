@@ -1,7 +1,9 @@
-const FILES_TO_CACHE = [
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = "data-cache-v1";
+
+const FILES = [
     '/',
     '/index.html',
-    '/indexeddb.js',
     '/styles.css',
     '/index.js',
     '/icons/icon-192x192.png',
@@ -9,25 +11,23 @@ const FILES_TO_CACHE = [
 
   ];
   
-  const PRECACHE = 'precache-v1';
-  const DATA = 'runtime';
   
-  self.addEventListener('install', (event) => {
-    event.waitUntil(
-      caches
-        .open(PRECACHE)
-        .then((cache) => cache.addAll(FILES_TO_CACHE))
-        .then(self.skipWaiting())
-    );
-  });
-  
+// install
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll(FILES))
+      .then(self.skipWaiting())
+  );
+});
 
   
-  // fetch
+// fetch
 self.addEventListener("fetch", function(evt) {
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
-      caches.open(DATA).then(cache => {
+      caches.open(DATA_CACHE_NAME).then(cache => {
         return fetch(evt.request)
           .then(response => {
             // If the response was good, clone it and store it in the cache.
@@ -37,18 +37,18 @@ self.addEventListener("fetch", function(evt) {
 
             return response;
           })
-          .catch(err => {
+          .catch(error => {
             // Network request failed, try to get it from the cache.
             return cache.match(evt.request);
           });
-      }).catch(err => console.log(err))
+      }).catch(error => console.log(error))
     );
 
     return;
   }
 
   evt.respondWith(
-    caches.open(DATA).then(cache => {
+    caches.open(CACHE_NAME).then(cache => {
       return cache.match(evt.request).then(response => {
         return response || fetch(evt.request);
       });
